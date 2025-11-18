@@ -1,4 +1,12 @@
-textContent() vs allTextContents()
+<<<<<<<<<<<<<<<<<<<<  waitFor()    >>>>>>>>>>>>>>>>>>>>>>>>
+  waitFor() usage to be able to see all products on UI as  "await page.waitForLoadState("networkidle");" for waiting until all network requests are finished may be flaky for some time.  
+
+  await titlesOfProducts.first().waitFor(); // to wait until first product is visible
+
+
+===================================================================================================
+<<<<<<<<<<<<<<<<<<<<  textContent() vs allTextContents()    >>>>>>>>>>>>>>>>>>>>>>>>
+          textContent() vs allTextContents()
 
   
 console.log(await titlesOfProducts.first().textContent()); // get first product name as an string
@@ -11,3 +19,24 @@ console.log(await titlesOfProducts.first().allTextContents()); // get first prod
 console.log(await titlesOfProducts.allTextContents()); // get all product names as an array of strings
 
 [ 'ZARA COAT 3', 'ADIDAS ORIGINAL', 'iphone 13 pro' ]
+
+
+===================================================================================================
+<<<<<<<<<<<<<<<<<<<<Chain Locator>>>>>>>>>>>>>>>>>>>>>>>>
+
+await getAllfProductsLocators.nth(i).locator("button.btn.w-10.rounded").click();
+
+
+
+await getAllfProductsLocators.nth(i).locator("text= Add To Cart").click();
+      
+===================================================================================================
+<<<<<<<<<<<<<<<<<<<< count() >>>>>>>>>>>>>>>>>>>>>>>>
+
+The count() method you referenced—used as Locator.count() in your code example—comes from Playwright's Locator class and is part of the Playwright testing library, not Puppeteer. 
+
+  const count = await getAllfProductsLocators.count(); // get count of products
+
+===================================================================================================
+
+

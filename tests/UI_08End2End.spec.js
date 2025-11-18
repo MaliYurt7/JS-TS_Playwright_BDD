@@ -10,13 +10,15 @@ test("End2End", async ({ page }) => {
   const getAllfProductsLocators = page.locator("div.card-body");
   const expectedProductName = "ADIDAS ORIGINAL";
 
+  const titlesOfProducts = page.locator("div.card-body b"); // get list of product as an locator
+
   await setEmail.fill("mali7yurt@gmail.com");
   await setPassword.fill("test01");
   await signInBtn.click();
 
   await page.waitForLoadState("networkidle"); // to wait until all network requests are finished
 
-  const titlesOfProducts = page.locator("div.card-body b"); // get list of product as an locator
+  await titlesOfProducts.first().waitFor(); // to wait until first product is visible
 
   console.log(await titlesOfProducts.first().textContent()); // get first product name as an string
   console.log(await titlesOfProducts.first().allTextContents()); // get first product name as an array of strings
@@ -30,11 +32,13 @@ test("End2End", async ({ page }) => {
       .locator("b")
       .textContent();
     if (productName === expectedProductName) {
-      await getAllfProductsLocators
-        .nth(i)
-        .locator("button.btn.w-10.rounded")
-        .click();
-      await page.pause();
+      // await getAllfProductsLocators
+      //   .nth(i)
+      //   .locator("button.btn.w-10.rounded")
+      //   .click();
+
+      await getAllfProductsLocators.nth(i).locator("text= Add To Cart").click();
+      break;
     }
   }
 });
