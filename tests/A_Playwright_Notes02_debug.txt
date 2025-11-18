@@ -1,0 +1,32 @@
+<<<<<<<<<<<<<<<<<<<<< debug mode>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+npx playwright test tests/UI_07DebugMode.spec.js --debug
+
+playwright inspector opens
+
+===========================================================================================================================================
+
+<<<<<<<<<<<<<<<<<<<<< RECORD AND PLAYBACK>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+CODEGEN=="code generator”===> npx playwright codegen http://www.rahulshettyacademy.com/
+       ===> The Codegen helps to bring ready playwright code after manual do the manual action on website
+
+===========================================================================================================================================
+
+
+<<<<<<<<<<<<<<<<<<<<< SCREENSHOT AND TRACE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ reporter: [["html", { open: "never" }]],
+  // reporter: "html", // Reporter to use for test results
+  use: {
+    browserName: "chromium", // Default browser to use for tests (firefox, webkit, or chromium)
+    headless: false, // Run tests in headless mode (true) or headed mode
+    screenshot: "on",
+    "retain-on-failure", // "retain-on-failure" gives zip file only for failure test cases ("on" ==> gives zip file for every test cases which brings lots of data payload for the system.
+  },
+
+
+  //"npx playwright show-report" also brings the report on website
+  //report, zip, screenshots stored under the "playwright-report"and " test-results" folder on the FW for each test cases
+
+===========================================================================================================================================

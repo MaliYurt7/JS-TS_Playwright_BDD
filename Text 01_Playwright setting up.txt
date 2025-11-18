@@ -1,0 +1,180 @@
+Steps:
+1. Create a new folder for VS Code project
+2. Open the folder in VS Code
+3. Open VS Code terminal
+4. Give the npm init playwright@latest command
+5. When asked Okay to proceed? type y
+6. Select JavaScript for the language
+7. Select the default folder for end-to-end tests by simply pressing the
+Enter key
+8. Select false for adding GitHub Actions workflow by simply pressing
+the Enter key
+9. Select true for installing playwright browsers by simply pressing the
+Enter key
+10. Wait for the installations to be completed
+11. Open the terminal and give the npx playwright test command (By default it runs the tests in headless mode
+12. Open the terminal and and give the npx playwright test –-headed command
+Inside that directory, you can run several commands:
+
+  npx playwright test
+    Runs the end-to-end tests.
+
+  npx playwright test --ui
+    Starts the interactive UI mode.
+
+  npx playwright test --project=chromium
+    Runs the tests only on Desktop Chrome.
+
+  npx playwright test example
+    Runs the tests in a specific file.
+
+  npx playwright test --debug
+    Runs the tests in debug mode.
+
+  npx playwright codegen
+    Auto generate tests with Codegen.
+
+    ====================================================================================
+    Recommended Naming Conventions
+
+• For folder names: lowercase
+
+• For test files: lowerCamelCase or Kebab-case
+■ lowerCamelCase: loginTest.spec.js, loginTest.test.js
+■ Kebab-case: login-test.spec.js, login-test.test.js
+
+• For page object files: UpperCamelCase
+■ UpperCamelCase: LoginPage.js
+
+loginTest.spec.js ve loginTest.test.js dosya adlarının farkı esasen testin türüne veya kullanılan test yaklaşımına işaret eder; işlevsel olarak ise ikisi genellikle aynı şekilde çalışır ve çoğu araçta birlikte kullanılabilirler.​
+
+Teknik Farklar
+.spec.js dosya adı, genellikle "specification" (özellik/specification tabanlı test) anlamına gelir ve Behavior Driven Development (BDD) yaklaşımıyla ilişkilidir.​
+
+.test.js dosya adı ise, doğrudan "test" kavramına vurgu yapar ve daha klasik Test Driven Development (TDD) veya genel test felsefesini yansıtır.
+| Dosya Adı         | Temel Anlam                                  | Yaklaşım        | Araç Desteği         |
+| ----------------- | -------------------------------------------- | --------------- | -------------------- |
+| loginTest.spec.js | Specification, BDD odaklı test               | BDD             | Jest, Mocha, Jasmine |
+| loginTest.test.js | Genel test, klasik test felsefesi/TDD odaklı | TDD, genel test | Jest, Mocha, Jasmine |
+
+=========================================================================================================
+
+
+Playwright automation lesson 1
+
+Under the node_modules, the @playwright folder should be there
+
+**** "npx playwright test" ==> to run tests thru terminal by NOT opening browsers (headless)
+**** "npx playwright test --headed" ==> to run tests thru terminal by opening browsers
+
+
+
+***************************
+????npx playwright test burda kı komutta npx ın acılımı nedır neden npm kullanmıyoruz?????
+
+npx, "Node Package eXecute" ifadesinin kısaltmasıdır ve npm tarafından sağlanan bir araçtır. npx, npm 5.2.0 sürümü ile birlikte gelmiştir. npx komutu, bir paketin sistemde global veya lokal olarak yüklü olup olmadığına bakmadan o paketi geçici olarak indirip çalıştırmanızı sağlar. Bu sayede paketi kalıcı olarak kurmaya gerek kalmaz.
+
+Neden npx kullanıyoruz, npm kullanmıyoruz?
+npm paketleri indirip kurmak için kullanılır (örneğin: npm install).
+
+Kurulan paketler genellikle node_modules klasöründe yerel, hatta -g ile global olarak kalıcı kurulum yapılır.
+
+npx ise özellikle CLI aracı olan paketleri anında ve geçici olarak çalıştırmak için kullanılır. Paketi indirir, çalıştırır ve sonra paketi sistemde bırakmaz.
+
+Böylece global kurulum yapmadan farklı projelerde farklı sürümleri karışmadan rahatça kullanabilirsiniz.
+
+Ayrıca global kurulum yetkisi olmayan bilgisayarlarda veya tek seferlik kullanımda çok pratik ve hızlıdır.
+
+Örnekler
+npx playwright test komutuyla Playwright testlerini çalıştırırız. Playwright projenizde yüklü değilse geçici indirip hemen çalıştırır.
+
+npm install -g playwright ile global kurulum yaparsanız, sistemde hep kalır ve güncelleme yapmanız gerekir.
+
+Özetle, npx paket çalıştırmak için, npm ise paket yüklemek ve yönetmek için kullanılır. Komut satırında npx kullanmak, pratiklik ve projeler arası versiyon karışıklığını önlemek için tercih edilir.
+
+*********************************************************************************
+
+npm nedir?
+
+
+npm, yani Node Package Manager, Node.js ekosisteminin bir parçası olan paket yönetim aracıdır. JavaScript projelerinde kullanılan kütüphaneleri (paketleri) bulmanızı, indirmenizi, güncellemenizi ve yönetmenizi sağlar. npm sayesinde projelerinizin ihtiyaç duyduğu dış bağımlılıkları kolayca kontrol edebilirsiniz.
+
+npm'in Temel Özellikleri
+Paket Yönetimi: npm, istediğiniz JavaScript paketlerini terminalden kolayca yüklemenizi ve proje içinde kullanılmasını sağlar.
+
+package.json: Projeye ait kullanılan paketlerin, sürümlerin ve komutların listelendiği yapılandırma dosyasıdır. Bu dosya sayesinde paketler ve proje ayarları düzenli tutulur.
+
+Global ve Yerel Paket Kurulumu: Paketler, sadece o projede (yerel) ya da tüm sistem genelinde (global) kullanılmak üzere yüklenebilir.
+
+Bağımlılık Güncelleme: npm update komutuyla projedeki paketleri kolayca güncelleyebilirsiniz.
+
+Geliştirici Araçları: Test kütüphaneleri, derleyici gibi geliştirme araçlarını da npm üzerinden kurmak mümkündür.
+
+Kullanım Örneği
+Bir paketi projeye kurmak: npm install paket_adi
+
+Tüm bağımlılıkları kurmak (package.json'dan): npm install
+
+Paket kaldırmak: npm uninstall paket_adi
+
+Proje komutlarını çalıştırmak: npm run komut_adi
+
+Özetle, npm, JavaScript ve Node.js projeleriniz için dış kütüphane yönetimini kolaylaştıran, paketi indirip güncelleyen ve projeyi düzenli tutan standart araçtır.
+
+*************************************************************************************
+
+package.json
+
+!!!! "NPM Run" extension ==> Run package.json scripts with single click (Run button icon can show up inside of the "scripts" in the package.json  )
+
+"scripts" ==> stores the comman command to run test thru terminal for automation
+"scripts": {
+    "tests":"npx playwright test", //running all tests in the FW
+    "tests:specific":"npx playwright test --grep playwrightIntro.spec.js", // running all file
+    "tests:specific1":"npx playwright test --grep playwright-with-ai.spec.js",
+
+
+    "report": "npx playwright show-report" /* shows the reportand report type is HTML*/
+  },
+
+
+
+
+*** "Playwright Test for VSCode" ==> it gives "run" icon button in each test(look at the playwright-with-ai.spec.js )
+
+
+playwright.config.js
+
+
+
+====================================Playwright automation lesson2====================================
+
+Each test Description should be unique under the each .spec.js test file. Otherwise it gives "dublicate test tile" error.
+
+import { test } from '@playwright/test';
+
+test('Description - 1 ', async ({ page }) => {
+  // Your test steps go here
+});
+
+test('Description - 2', async ({ page }) => {
+    // Your test steps go here
+  });
+
+  test('Description - 3', async ({ page }) => {
+    // Your test steps go here
+  });
+
+===========
+
+
+Tag helps us run any specific tests
+
+  "tests:specificAllTestGroup":"npx playwright test --grep testGroupsPractice.spec.js",
+
+    "tests:specificOneOfTheTestGroupwithTag":"npx playwright test --grep @smoke",  //==> it is searchinf all tests and find the exact same word in description and run the tests.
+
+    "tests:specificOneOfTheTestWithinGroupwithTag":"npx playwright test --grep @sanity", // ==> it is searchinf all tests and find the exact same word in description and run the tests.
+
+
+----------------------------------------------

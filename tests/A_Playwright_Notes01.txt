@@ -1,0 +1,44 @@
+inputValue() vs textContent()
+
+The inputValue() and textContent() methods in Playwright are used for different purposes—one is for input elements, the other for general HTML content.
+inputValue()
+
+    Retrieves the current value inside an <input>, <textarea>, or <select> element.
+
+    ​
+
+    Returns what the user typed or what was set by the application.
+
+    Only works with these input-type elements; other nodes will not provide meaningful results.
+
+textContent()
+
+    Gets all text content from an element and its children, including hidden or formatted text.
+
+    ​
+
+    Applies to any regular HTML element except for input elements, which always have empty textContent.
+
+    Used for verifying or scraping displayed page data outside form fields.
+
+Comparison Table
+Method	        Use case	                Works for	                Returns
+inputValue()	Get value in form fields	input, textarea, select	    User/data-entered value
+​
+textContent()	Get visible text content	Any element except input	All contained text (except inputs)
+​
+
+Use inputValue() for values inside form elements, and textContent() for general text within DOM elements. Each method will return an empty string or undefined if applied to the wrong type of element.
+
+===========================================================================================================================================
+                        Promise.all()   
+
+ //Promise.all() is used to wait for multiple promises to resolve. In this case, it waits for the new page to be opened and the click action on the blinking message.Also, Promise.all() ensures that both actions are paralelly completed before proceeding to the next steps in the test.
+  //waitForEvent() and click() are used to handle the new tab that opens when clicking on the blinking message and to ensure the test waits for the new page to load. Then, we can continue with the rest of the test on the new page.
+  //if more than one page is opened, const [newPage, newPage2, newPage3] = await Promise.all([...]) can be used to handle multiple pages.
+  const [newPage] = await Promise.all([
+    context.waitForEvent("page"), //listen for any new page pending,rejected,fulfilled
+    blinkingMessage.click(),
+  ]);
+===========================================================================================================================================
+

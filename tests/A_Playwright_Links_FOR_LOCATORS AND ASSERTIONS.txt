@@ -1,0 +1,62 @@
+====Playwright E2E testing cheatsheet===
+https://dev.to/olhapi/playwright-e2e-testing-cheatsheet-15gl?utm_source=substack&utm_medium=email
+
+***Locator strategies:***
+
+Locator priority hierarchy
+1. Role-based locators (highest priority)
+
+await page.getByRole('button', { name: 'Submit Order' }).click();
+await page.getByRole('textbox', { name: 'Email Address' }).fill('user@example.com');
+await page.getByRole('heading', { name: 'Welcome Dashboard' });
+
+
+
+2. Test ID locators (stable and recommended)
+await page.getByTestId('checkout-submit-button').click();
+
+
+
+3. Text-based locators (user-visible content)
+
+await page.getByText('Welcome back, John!').click();
+await page.getByLabel('Password').fill('secure-password');
+await page.getByPlaceholder('Enter your email').fill('user@example.com');
+
+
+
+
+4. CSS/XPath (try to avoid)
+
+// Only when other options aren't viable
+await page.locator('.legacy-element').click();
+
+=======================================================================
+Advanced locator patterns
+1)Chaining and filtering for complex scenarios:
+
+const productCard = page.getByRole('listitem')
+  .filter({ hasText: 'iPhone 15 Pro' })
+  .getByRole('button', { name: 'Add to Cart' });
+
+await productCard.click();
+
+
+2) Data-testId naming convention:
+
+// Pattern: {scope}-{component}-{element}-{type}
+data-testid="header-navigation-login-button"
+data-testid="checkout-form-email-input"
+data-testid="product-card-price-display"
+
+
+
+
+
+
+// Assert the title after clicking the link
+
+  1) await expect($locator).to{$Dynamic}
+  2) await expect(page).to{$Dynamic}=====>3
+  3) await expect($response).toBeOK();===>1
+  4) expect(value).$Dynamic

@@ -1,0 +1,19 @@
+{
+  "name": "playwrightautomationlatest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test1": "npm run test ./tests/UI_03Assertion.spec.js",
+    "tests": "npx playwright test",
+    "tests:specific": "npx playwright test --grep UI_04Locator.spec.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^24.1.0"
+  }
+}

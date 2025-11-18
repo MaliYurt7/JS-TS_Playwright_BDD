@@ -1,0 +1,13 @@
+textContent() vs allTextContents()
+
+  
+console.log(await titlesOfProducts.first().textContent()); // get first product name as an string
+  ZARA COAT 3
+
+console.log(await titlesOfProducts.first().allTextContents()); // get first product name as an array of strings
+  [ 'ZARA COAT 3' ]
+
+
+console.log(await titlesOfProducts.allTextContents()); // get all product names as an array of strings
+
+[ 'ZARA COAT 3', 'ADIDAS ORIGINAL', 'iphone 13 pro' ]

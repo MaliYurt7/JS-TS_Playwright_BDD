@@ -1,0 +1,95 @@
+================Running Test cases==========================
+npx playwright test tests ==> Run all spec.js files under the 'tests' folder. if there is more than one test files,it runs all parallel.if there is one file and this file has more than 1 test cases , it runs them sequentially  
+
+================Running Test cases with "--headed" mode==========================
+
+npx playwright test tests --headed==> it runs test cases visible browser
+
+=========================Running Test cases wiht "test.only"==========================
+
+if "test.only" is used, then only those test case(s) can run. "test.only" can be used for newlt written test cases, or etc..
+test.only("çok yavaş bir test", async ({ page }) => {
+  test.setTimeout(120000);
+  await page.goto("https://playwright.dev/docs/test-timeouts");
+  await page.waitForTimeout(10000); 
+
+});
+
+=========================Assertions==============================================
+import { expect, test } from "@playwright/test";
+// 'expect' comes from "@playwright/test" and for playwright there is no need to add external framework for Assertions as it requires in Cypress
+
+For more information on Assertions ==> https://playwright.dev/docs/api/class-pageassertions
+
+===================================LOCATORS================================================
+• Locator Selectors: ==> https://playwright.dev/docs/locators
+■ CSS selectors: page.locator('button.primary')
+■ XPath: page.locator('//button[contains(text(), "Submit")]')
+■ Text content: page.locator('text=Submit')
+■ TestID: page.locator('data-testid=submit-button')
+*** please look at the links on a "A_Playwright_Link.txt" file for "Locator strategies"
+
+***Locator strategies:*** (https://playwright.dev/docs/locators#locate-by-role)
+Locator priority hierarchy
+1. Role-based locators (highest priority)
+
+await page.getByRole('button', { name: 'Submit Order' }).click();
+await page.getByRole('textbox', { name: 'Email Address' }).fill('user@example.com');
+await page.getByRole('heading', { name: 'Welcome Dashboard' });
+
+
+
+2. Test ID locators (stable and recommended)
+await page.getByTestId('checkout-submit-button').click();
+
+
+
+3. Text-based locators (user-visible content)
+
+await page.getByText('Welcome back, John!').click();
+await page.getByLabel('Password').fill('secure-password');
+await page.getByPlaceholder('Enter your email').fill('user@example.com');
+
+
+
+
+4. CSS/XPath (try to avoid)
+
+// Only when other options aren't viable
+await page.locator('.legacy-element').click();
+
+=======================================================================
+Advanced locator patterns
+1)Chaining and filtering for complex scenarios:
+
+const productCard = page.getByRole('listitem')
+  .filter({ hasText: 'iPhone 15 Pro' })
+  .getByRole('button', { name: 'Add to Cart' });
+
+await productCard.click();
+
+
+2) Data-testId naming convention:
+
+// Pattern: {scope}-{component}-{element}-{type}
+data-testid="header-navigation-login-button"
+data-testid="checkout-form-email-input"
+data-testid="product-card-price-display"
+
+
+
+Selector extentions for Chrome, firefox==> https://selectorshub.com/selectorshub/#download-section
+============================fill() vs type()===============================================
+
+Method	                   Status	           Description
+type()	                   Deprecated	       Used for slow typing with delay, discouraged.
+fill()	                   Recommended	     Instantly fills input value, no delay option.
+pressSequentially()	       Alternative	     Types keys sequentially with delay, simulates typing.
+
+Example:
+await locator.type('text', { delay: 100 });
+await locator.fill('text');  // no delay, instant fill
+await locator.pressSequentially('text', { delay: 100 });
+
+Note: type() method is deprecated
+=============================================================================================

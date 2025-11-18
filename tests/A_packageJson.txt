@@ -1,0 +1,61 @@
+Bu "scripts" kısmındaki ifadelerde birkaç konu var, onları basitleştirelim:
+
+json
+"scripts": {
+  "test": "playwright test",
+  "tests": "npx playwright test",
+  "test1": "npm run test ./tests/UI_03Assertion.spec.js",
+  "tests:specific": "npx playwright test --grep UI_04Locator.spec.js"
+}
+
+Detaylı anlatım:
+    1) "test": "playwright test"
+
+    =npm test= komutu bu scripti çalıştırır eger herhangi bir "test.only" function yok ise.
+    Ayrica =npx playwright test= komutu da bu scripti çalıştırır.
+
+    Projende yüklü olan playwright paketini kullanarak tüm testleri çalıştırır.
+
+    2) "test1": "npm run test ./tests/UI_03Assertion.spec.js"
+
+    Bu biraz yanlış tanımlanmış. npm run ile başka bir script çağırırken parametre veremezsin böyle.
+
+   =npm run test1= dediğinde, npm run test ./tests/UI_03Assertion.spec.js çalışır ki bu komut sadece npm tarafından desteklenmez. Bu sebepten =npm run test1= yazilmalidir  (parametre doğrudan geçmez).
+
+   =npx playwright test ./tests/UI_03Assertion.spec.js=
+   =npm run test ./tests/UI_03Assertion.spec.js=
+   3) "tests": "npx playwright test"
+
+    npm run tests yazıldığında, npx kullanılarak playwright test komutu çalıştırılır.
+
+    npx paketi lokal kurulu değilse indirip çalıştırır. Garantili şekilde çalıştırmak için tercih edilir.
+
+    "tests:specific": "npx playwright test --grep UI_04Locator.spec.js"
+
+    npm run tests:specific çalıştırıldığında, --grep parametresi ile sadece belirli testler (burada UI_04Locator.spec.js) filtrelenerek çalışır.
+
+    Bu, belirli testleri çalıştırmak için kullanışlıdır.
+
+Özet
+
+    test npm tarafından otomatik olarak tanınan ve kısa yoldan npm test ile çağrılan standart bir isimdir. =npm test=
+
+    tests, test1, ve tests:specific gibi isimler özel tanımlamalar, elle =npm run tests= veya =npm run tests:specific= olarak çağrılır.
+
+    npx paketi mutlaka çalıştırır, paketin varlığına bakmaz, gerektiğinde indirip kullanır.
+
+    npm run ile başka script'e parametre vermek doğrudan desteklenmez, ona göre script yazılmalı.
+
+Eğer test1 için komut çalıştırmak istiyorsan, "test1": "playwright test ./tests/UI_03Assertion.spec.js" şeklinde yazmalısın.
+
+Yani:
+
+    npm test → projendeki tüm testleri çalıştırır.
+
+    npm run tests → npx ile playwright test komutunu çalıştırır.
+
+    npm run tests:specific → filtrelenmiş belli testleri çalıştırır.
+
+    npm run test1 → düzeltme yapılırsa belirli bir test dosyasını çalıştırır.
+
+Böylece her script farklı amaç ve kullanım için ayrılmıştır.

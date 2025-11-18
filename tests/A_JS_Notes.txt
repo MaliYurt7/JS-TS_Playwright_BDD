@@ -1,0 +1,30 @@
+============="use strict;"=========
+
+JavaScript'te "use strict" ifadesi, kodun "katı modda" (strict mode) çalıştırılmasını sağlar. Bu mod, kodun daha güvenli ve hatalara karşı daha korumalı yazılmasını zorunlu kılar. Normalde JavaScript oldukça esnek bir dil olduğu için bazı hatalı kullanımlar gözden kaçabilir, ancak "use strict" ile aşağıdaki gibi kurallara uymak zorunda kalırsın.
+Basit Anlatım
+
+    "use strict" yazdığında, JavaScript kodun hataya açık eski davranışlarını engeller.
+
+    Örneğin: Bir değişkeni tanımlamadan (var/let/const olmadan) kullanmaya çalışırsan hata verir.
+
+    Fonksiyonda aynı isimli parametre kullanırsan hata alırsın.
+
+    Bazı yasaklı isimleri (eval, arguments) değişken olarak kullanmaya izin vermez.
+
+    Nesne ya da fonksiyonları silmeye çalışırsan hata verir.
+
+Neden Kullanılır?
+
+    Kodun daha güvenli ve kolay yönetilebilir olsun diye.
+
+    Hataları erken fark etmeni sağlar.
+
+    Kötü ve yanlış kod yazımını önler.
+
+    Büyük, karmaşık projelerde güvenli gelişim için standarttır.
+
+===Örnek==
+"use strict";
+x = 10; // Burada hata alırsın çünkü x tanımlı değil.
+
+Kısacası, "use strict" kodun daha düzenli, güvenli ve hatasız olmasına yardım eden bir anahtar kelimedir.

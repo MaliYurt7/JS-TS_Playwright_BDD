@@ -1,0 +1,6 @@
+// Assert the title after clicking the link
+
+  1) await expect($locator).to{$Dynamic}
+  2) await expect(page).to{$Dynamic}=====>3
+  3) await expect($response).toBeOK();===>1
+  4) expect(value).$Dynamic
