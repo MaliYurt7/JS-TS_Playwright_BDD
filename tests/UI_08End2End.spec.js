@@ -7,6 +7,9 @@ test("End2End", async ({ page }) => {
   const setPassword = page.getByPlaceholder("enter your passsword");
   const signInBtn = page.getByRole("button", { name: "login" });
 
+  const getAllfProductsLocators = page.locator("div.card-body");
+  const expectedProductName = "ADIDAS ORIGINAL";
+
   await setEmail.fill("mali7yurt@gmail.com");
   await setPassword.fill("test01");
   await signInBtn.click();
@@ -19,5 +22,19 @@ test("End2End", async ({ page }) => {
   console.log(await titlesOfProducts.first().allTextContents()); // get first product name as an array of strings
 
   console.log(await titlesOfProducts.allTextContents()); // get all product names as an array of strings
-  await page.pause();
+
+  const count = await getAllfProductsLocators.count(); // get count of products
+  for (let i = 0; i < count; i++) {
+    const productName = await getAllfProductsLocators
+      .nth(i)
+      .locator("b")
+      .textContent();
+    if (productName === expectedProductName) {
+      await getAllfProductsLocators
+        .nth(i)
+        .locator("button.btn.w-10.rounded")
+        .click();
+      await page.pause();
+    }
+  }
 });
