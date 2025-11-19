@@ -36,9 +36,17 @@ test("End2End", async ({ page }) => {
       //   .nth(i)
       //   .locator("button.btn.w-10.rounded")
       //   .click();
-
       await getAllfProductsLocators.nth(i).locator("text= Add To Cart").click();
       break;
     }
   }
+
+  await page.locator("[routerlink*='cart']").click();
+  await page.locator("div.infoWrap").nth(0).waitFor();
+
+  const prodVisible = await page
+    .locator("h3:has-text('ADIDAS ORIGINAL')")
+    .isVisible();
+
+  expect(prodVisible).toBeTruthy();
 });
