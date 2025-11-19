@@ -1,7 +1,7 @@
 <<<<<<<<<<<<<<<<<<<<  waitFor()    >>>>>>>>>>>>>>>>>>>>>>>>
   waitFor() usage to be able to see all products on UI as  "await page.waitForLoadState("networkidle");" for waiting until all network requests are finished may be flaky for some time.  
 
-  await titlesOfProducts.first().waitFor(); // to wait until first product is visible
+  await titlesOfProducts.first().waitFor(); // to wait until first product is visible (expilicit wait)
 
 
 ===================================================================================================
@@ -39,4 +39,14 @@ The count() method you referenced—used as Locator.count() in your code example
 
 ===================================================================================================
 
+<<<<<<<<<<<<<<<<<<<< locator with text >>>>>>>>>>>>>>>>>>>>>>>>
+
+      await getAllfProductsLocators.nth(i).locator("text= Add To Cart").click();
+       const prodVisible = await page.locator("h3:has-text('ADIDAS ORIGINAL')").isVisible();
+
+===================================================================================================
+<<<<<<<<<<<<<<<<<<<< expilicit wait >>>>>>>>>>>>>>>>>>>>>>>>
+
+  await page.locator("div.infoWrap").nth(0).waitFor();
+===================================================================================================
 
