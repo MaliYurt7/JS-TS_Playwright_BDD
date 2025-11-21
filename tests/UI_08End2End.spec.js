@@ -49,4 +49,54 @@ test("End2End", async ({ page }) => {
     .isVisible();
 
   expect(prodVisible).toBeTruthy();
+
+  await page.getByRole("button", { name: "Checkout" }).click();
+
+  //Entering the card details
+  await page.locator("div.field input.input.txt.text-validated").clear();
+  await page
+    .locator("div.field input.input.txt.text-validated")
+    .fill("6666 7777 8888 9999");
+  await page.locator("select.input.ddl:nth-child(2)").click();
+
+  await page.locator("select.input.ddl:nth-child(2)").selectOption("12");
+
+  await page.locator("select.input.ddl:nth-child(3)").click();
+
+  await page.locator("select.input.ddl:nth-child(3)").selectOption("12");
+
+  await page
+    .locator("div.field.small [type='text'][class='input txt']")
+    .fill("999");
+
+  await page
+    .locator("//div[text()='Name on Card ']/..//input")
+    .fill("Mali Yurt");
+
+  await page.locator("input[name='coupon']").fill("CODE2022");
+
+  await page.getByRole("button", { name: "Apply Coupon" }).click();
+
+  await page.locator("[placeholder*='Country']").clear();
+  await page.locator("[placeholder*='Country']").click();
+  await page
+    .getByPlaceholder("Select Country")
+    .pressSequentially("ind", { delay: 150 });
+  const dropdown = page.locator(".ta-results");
+  await dropdown.waitFor();
+  const optionsCount = await dropdown.locator("button").count();
+  for (let i = 0; i < optionsCount; ++i) {
+    const text = await dropdown.locator("button").nth(i).textContent();
+    if (text === " India") {
+      await dropdown.locator("button").nth(i).click();
+      break;
+    }
+  }
+
+  await page.locator("a:has-text('Place Order')").click();
+  expect(
+    await page.locator("tr td[align='center'] h1").textContent()
+  ).toContain("Thankyou for the order.");
+
+  await page.pause();
 });
