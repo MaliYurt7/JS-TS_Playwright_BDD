@@ -98,5 +98,27 @@ test("End2End", async ({ page }) => {
     await page.locator("tr td[align='center'] h1").textContent()
   ).toContain("Thankyou for the order.");
 
-  await page.pause();
+  const orderId = await page
+    .locator("td.em-spacer-1 label.ng-star-inserted")
+    .textContent();
+
+  console.log("orderId = " + orderId);
+
+  await page.locator("button", { hasText: "ORDERS" }).click();
+
+  await page.locator("tbody").waitFor();
+
+  const orderIds = await page.locator("tr.ng-star-inserted");
+  const numOfOrderId = await orderIds.count();
+
+  for (let i = 0; i < numOfOrderId; i++) {
+    const singleOrderId = await orderIds.nth(i).locator("th").textContent();
+    if (orderId.trim().includes(singleOrderId.trim())) {
+      await orderIds.nth(i).locator("button.btn.btn-primary").click();
+      await expect(
+        page.locator("div.email-container div.col-text.-main")
+      ).toContainText(singleOrderId.trim());
+      break;
+    }
+  }
 });
